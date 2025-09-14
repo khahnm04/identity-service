@@ -1,6 +1,6 @@
 package com.khahnm04.identityservice.controller;
 
-import com.khahnm04.identityservice.dto.request.ApiResponse;
+import com.khahnm04.identityservice.dto.response.ApiResponse;
 import com.khahnm04.identityservice.dto.request.UserCreationRequest;
 import com.khahnm04.identityservice.dto.request.UserUpdateRequest;
 import com.khahnm04.identityservice.dto.response.UserResponse;

@@ -1,6 +1,6 @@
 package com.khahnm04.identityservice.exception;
 
-import com.khahnm04.identityservice.dto.request.ApiResponse;
+import com.khahnm04.identityservice.dto.response.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
