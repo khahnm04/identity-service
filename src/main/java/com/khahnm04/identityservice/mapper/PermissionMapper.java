@@ -1,22 +1,15 @@
 package com.khahnm04.identityservice.mapper;
 
-import com.khahnm04.identityservice.dto.request.UserCreationRequest;
-import com.khahnm04.identityservice.dto.request.UserUpdateRequest;
-import com.khahnm04.identityservice.dto.response.UserResponse;
-import com.khahnm04.identityservice.entity.User;
+import com.khahnm04.identityservice.dto.request.PermissionRequest;
+import com.khahnm04.identityservice.dto.response.PermissionResponse;
+import com.khahnm04.identityservice.entity.Permission;
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public interface PermissionMapper {
 
-    User toUser(UserCreationRequest request);
+    Permission toPermission(PermissionRequest request);
 
-    //@Mapping(source = "firstName", target = "lastName") // Mapping firstName (User) -> lastName (UserResponse)
-    //@Mapping(target = "lastName", ignore = true) // Bỏ qua (không map) field lastName trong UserResponse
-    UserResponse toUserResponse(User user);
-
-    void updateUser(@MappingTarget User user, UserUpdateRequest request);
+    PermissionResponse toPermissionResponse(Permission permission);
 
 }

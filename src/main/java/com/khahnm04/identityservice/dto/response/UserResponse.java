@@ -1,5 +1,6 @@
 package com.khahnm04.identityservice.dto.response;
 
+import com.khahnm04.identityservice.entity.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import java.time.LocalDate;
@@ -22,6 +23,6 @@ public class UserResponse {
 
     LocalDate dob;
 
-    Set<String> roles;
+    Set<Role> roles;
 
 }

@@ -1,45 +1,48 @@
 package com.khahnm04.identityservice.controller;
 
-import com.khahnm04.identityservice.dto.request.PermissionRequest;
+import com.khahnm04.identityservice.dto.request.RoleRequest;
 import com.khahnm04.identityservice.dto.response.ApiResponse;
-import com.khahnm04.identityservice.dto.response.PermissionResponse;
-import com.khahnm04.identityservice.service.PermissionService;
+import com.khahnm04.identityservice.dto.response.RoleResponse;
+import com.khahnm04.identityservice.service.RoleService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/permissions")
+@RequestMapping("/roles")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class PermissionController {
+public class RoleController {
 
-    PermissionService permissionService;
+    RoleService roleService;
 
     @PostMapping
-    ApiResponse<PermissionResponse> createUser(
-        @RequestBody @Valid PermissionRequest request
+    ApiResponse<RoleResponse> createUser(
+        @RequestBody @Valid RoleRequest request
     ) {
-        return ApiResponse.<PermissionResponse>builder()
-                .result(permissionService.create(request))
+        return ApiResponse.<RoleResponse>builder()
+                .result(roleService.create(request))
                 .build();
     }
 
     @GetMapping
-    ApiResponse<List<PermissionResponse>> getAll() {
-        return ApiResponse.<List<PermissionResponse>>builder()
-                .result(permissionService.getAll())
+    ApiResponse<List<RoleResponse>> getAll() {
+        return ApiResponse.<List<RoleResponse>>builder()
+                .result(roleService.getAll())
                 .build();
     }
 
-    @DeleteMapping("/{permission}")
-    ApiResponse<Void> delete(@PathVariable String permission) {
-        permissionService.delete(permission);
+    @DeleteMapping("/{role}")
+    ApiResponse<Void> delete(
+        @PathVariable String role
+    ) {
+        roleService.delete(role);
         return ApiResponse.<Void>builder().build();
     }
 
