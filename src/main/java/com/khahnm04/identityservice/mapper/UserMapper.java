@@ -17,6 +17,7 @@ public interface UserMapper {
     //@Mapping(target = "lastName", ignore = true) // Bỏ qua (không map) field lastName trong UserResponse
     UserResponse toUserResponse(User user);
 
+    @Mapping(target = "roles", ignore = true)
     void updateUser(@MappingTarget User user, UserUpdateRequest request);
 
 }
