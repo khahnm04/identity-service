@@ -1,5 +1,6 @@
 package com.khahnm04.identityservice.dto.request;
 
+import com.khahnm04.identityservice.validator.DobConstraint;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import lombok.*;
@@ -22,6 +23,7 @@ public class UserCreationRequest {
 
     String lastName;
 
+    @DobConstraint(min = 18, message = "INVALID_DOB")
     LocalDate dob;
 
 }

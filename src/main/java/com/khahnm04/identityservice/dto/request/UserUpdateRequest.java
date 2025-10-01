@@ -2,6 +2,7 @@ package com.khahnm04.identityservice.dto.request;
 
 import java.time.LocalDate;
 
+import com.khahnm04.identityservice.validator.DobConstraint;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import java.util.List;
@@ -19,6 +20,7 @@ public class UserUpdateRequest {
 
     String lastName;
 
+    @DobConstraint(min = 18, message = "INVALID_DOB")
     LocalDate dob;
 
     List<String> roles;
