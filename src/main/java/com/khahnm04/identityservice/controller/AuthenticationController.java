@@ -1,6 +1,7 @@
 package com.khahnm04.identityservice.controller;
 
 import com.khahnm04.identityservice.dto.request.IntrospectRequest;
+import com.khahnm04.identityservice.dto.request.LogoutRequest;
 import com.khahnm04.identityservice.dto.response.ApiResponse;
 import com.khahnm04.identityservice.dto.request.AuthenticationRequest;
 import com.khahnm04.identityservice.dto.response.AuthenticationResponse;
@@ -38,6 +39,15 @@ public class AuthenticationController {
         var result = authenticationService.introspect(request);
         return ApiResponse.<IntrospectResponse>builder()
                 .result(result)
+                .build();
+    }
+
+    @PostMapping("/logout")
+    ApiResponse<Void> logout(
+        @RequestBody LogoutRequest request
+    ) throws ParseException, JOSEException {
+        authenticationService.logout(request);
+        return ApiResponse.<Void>builder()
                 .build();
     }
 
