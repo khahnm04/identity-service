@@ -3,6 +3,7 @@ package com.khahnm04.identityservice.service;
 import com.khahnm04.identityservice.dto.request.AuthenticationRequest;
 import com.khahnm04.identityservice.dto.request.IntrospectRequest;
 import com.khahnm04.identityservice.dto.request.LogoutRequest;
+import com.khahnm04.identityservice.dto.request.RefreshRequest;
 import com.khahnm04.identityservice.dto.response.AuthenticationResponse;
 import com.khahnm04.identityservice.dto.response.IntrospectResponse;
 import com.khahnm04.identityservice.entity.InvalidatedToken;
@@ -84,6 +85,25 @@ public class AuthenticationService {
                 .expiryDate(expiryTime)
                 .build();
         invalidatedTokenRepository.save(invalidatedToken);
+    }
+
+    public AuthenticationResponse refreshToken(RefreshRequest request) throws ParseException, JOSEException {
+        var signJWT = verifyToken(request.getToken());
+        String jit = signJWT.getJWTClaimsSet().getJWTID();
+        Date expiryTime = signJWT.getJWTClaimsSet().getExpirationTime();
+        InvalidatedToken invalidatedToken = InvalidatedToken.builder()
+                .id(jit)
+                .expiryDate(expiryTime)
+                .build();
+        invalidatedTokenRepository.save(invalidatedToken);
+        var username = signJWT.getJWTClaimsSet().getSubject();
+        var user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new AppException(ErrorCode.UNAUTHENTICATED));
+        var token = generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(token)
+                .authenticated(true)
+                .build();
     }
 
     private SignedJWT verifyToken(String token) throws JOSEException, ParseException {

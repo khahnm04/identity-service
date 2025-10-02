@@ -2,6 +2,7 @@ package com.khahnm04.identityservice.controller;
 
 import com.khahnm04.identityservice.dto.request.IntrospectRequest;
 import com.khahnm04.identityservice.dto.request.LogoutRequest;
+import com.khahnm04.identityservice.dto.request.RefreshRequest;
 import com.khahnm04.identityservice.dto.response.ApiResponse;
 import com.khahnm04.identityservice.dto.request.AuthenticationRequest;
 import com.khahnm04.identityservice.dto.response.AuthenticationResponse;
@@ -41,6 +42,16 @@ public class AuthenticationController {
                 .result(result)
                 .build();
     }
+    @PostMapping("/refresh")
+    ApiResponse<AuthenticationResponse> authenticate(
+            @RequestBody RefreshRequest request
+    ) throws ParseException, JOSEException {
+        var result = authenticationService.refreshToken(request);
+        return ApiResponse.<AuthenticationResponse>builder()
+                .result(result)
+                .build();
+    }
+
 
     @PostMapping("/logout")
     ApiResponse<Void> logout(
