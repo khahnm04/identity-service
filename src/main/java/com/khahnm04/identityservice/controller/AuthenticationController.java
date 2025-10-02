@@ -42,6 +42,7 @@ public class AuthenticationController {
                 .result(result)
                 .build();
     }
+
     @PostMapping("/refresh")
     ApiResponse<AuthenticationResponse> authenticate(
             @RequestBody RefreshRequest request
@@ -51,7 +52,6 @@ public class AuthenticationController {
                 .result(result)
                 .build();
     }
-
 
     @PostMapping("/logout")
     ApiResponse<Void> logout(
