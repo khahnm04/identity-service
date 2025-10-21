@@ -1,10 +1,12 @@
 package com.khahnm04.identityservice.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import java.util.Date;
 
 @Entity
 @Getter
@@ -19,5 +21,4 @@ public class InvalidatedToken {
     String id;
 
     Date expiryDate;
-
 }

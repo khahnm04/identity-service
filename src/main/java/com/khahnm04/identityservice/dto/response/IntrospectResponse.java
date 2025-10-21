@@ -1,4 +1,5 @@
 package com.khahnm04.identityservice.dto.response;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -10,6 +11,4 @@ import lombok.experimental.FieldDefaults;
 public class IntrospectResponse {
 
     boolean valid;
-
 }
-

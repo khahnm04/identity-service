@@ -1,7 +1,9 @@
 package com.khahnm04.identityservice.configuration;
 
-import com.khahnm04.identityservice.dto.request.IntrospectRequest;
-import com.khahnm04.identityservice.service.AuthenticationService;
+import java.text.ParseException;
+import java.util.Objects;
+import javax.crypto.spec.SecretKeySpec;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
@@ -10,10 +12,10 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtException;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.stereotype.Component;
+
+import com.khahnm04.identityservice.dto.request.IntrospectRequest;
+import com.khahnm04.identityservice.service.AuthenticationService;
 import com.nimbusds.jose.JOSEException;
-import java.text.ParseException;
-import java.util.Objects;
-import javax.crypto.spec.SecretKeySpec;
 
 @Component
 public class CustomJwtDecoder implements JwtDecoder {
@@ -29,8 +31,8 @@ public class CustomJwtDecoder implements JwtDecoder {
     @Override
     public Jwt decode(String token) throws JwtException {
         try {
-            var response = authenticationService
-                    .introspect(IntrospectRequest.builder().token(token).build());
+            var response = authenticationService.introspect(
+                    IntrospectRequest.builder().token(token).build());
             if (!response.isValid()) {
                 throw new JwtException("Token invalid");
             }
@@ -45,5 +47,4 @@ public class CustomJwtDecoder implements JwtDecoder {
         }
         return nimbusJwtDecoder.decode(token);
     }
-
 }

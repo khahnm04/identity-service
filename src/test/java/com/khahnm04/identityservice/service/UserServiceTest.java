@@ -1,10 +1,14 @@
 package com.khahnm04.identityservice.service;
 
-import com.khahnm04.identityservice.dto.request.UserCreationRequest;
-import com.khahnm04.identityservice.dto.response.UserResponse;
-import com.khahnm04.identityservice.entity.User;
-import com.khahnm04.identityservice.exception.AppException;
-import com.khahnm04.identityservice.repository.UserRepository;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+
+import java.time.LocalDate;
+import java.util.Optional;
+
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +16,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import java.time.LocalDate;
-import java.util.Optional;
 
-import org.assertj.core.api.Assertions;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.khahnm04.identityservice.dto.request.UserCreationRequest;
+import com.khahnm04.identityservice.dto.response.UserResponse;
+import com.khahnm04.identityservice.entity.User;
+import com.khahnm04.identityservice.exception.AppException;
+import com.khahnm04.identityservice.repository.UserRepository;
 
 @SpringBootTest
 @TestPropertySource("/test.properties")
@@ -113,5 +114,4 @@ public class UserServiceTest {
 
         Assertions.assertThat(exception.getErrorCode().getCode()).isEqualTo(1005);
     }
-
 }

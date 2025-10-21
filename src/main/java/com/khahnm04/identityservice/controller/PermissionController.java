@@ -1,16 +1,20 @@
 package com.khahnm04.identityservice.controller;
 
+import java.util.List;
+
+import jakarta.validation.Valid;
+
+import org.springframework.web.bind.annotation.*;
+
 import com.khahnm04.identityservice.dto.request.PermissionRequest;
 import com.khahnm04.identityservice.dto.response.ApiResponse;
 import com.khahnm04.identityservice.dto.response.PermissionResponse;
 import com.khahnm04.identityservice.service.PermissionService;
-import jakarta.validation.Valid;
+
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -22,9 +26,7 @@ public class PermissionController {
     PermissionService permissionService;
 
     @PostMapping
-    ApiResponse<PermissionResponse> createUser(
-        @RequestBody @Valid PermissionRequest request
-    ) {
+    ApiResponse<PermissionResponse> createUser(@RequestBody @Valid PermissionRequest request) {
         return ApiResponse.<PermissionResponse>builder()
                 .result(permissionService.create(request))
                 .build();
@@ -38,11 +40,8 @@ public class PermissionController {
     }
 
     @DeleteMapping("/{permission}")
-    ApiResponse<Void> delete(
-        @PathVariable String permission
-    ) {
+    ApiResponse<Void> delete(@PathVariable String permission) {
         permissionService.delete(permission);
         return ApiResponse.<Void>builder().build();
     }
-
 }

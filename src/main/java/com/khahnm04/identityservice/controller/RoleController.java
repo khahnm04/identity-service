@@ -1,17 +1,20 @@
 package com.khahnm04.identityservice.controller;
 
+import java.util.List;
+
+import jakarta.validation.Valid;
+
+import org.springframework.web.bind.annotation.*;
+
 import com.khahnm04.identityservice.dto.request.RoleRequest;
 import com.khahnm04.identityservice.dto.response.ApiResponse;
 import com.khahnm04.identityservice.dto.response.RoleResponse;
 import com.khahnm04.identityservice.service.RoleService;
-import jakarta.validation.Valid;
+
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -23,9 +26,7 @@ public class RoleController {
     RoleService roleService;
 
     @PostMapping
-    ApiResponse<RoleResponse> createUser(
-        @RequestBody @Valid RoleRequest request
-    ) {
+    ApiResponse<RoleResponse> createUser(@RequestBody @Valid RoleRequest request) {
         return ApiResponse.<RoleResponse>builder()
                 .result(roleService.create(request))
                 .build();
@@ -39,11 +40,8 @@ public class RoleController {
     }
 
     @DeleteMapping("/{role}")
-    ApiResponse<Void> delete(
-        @PathVariable String role
-    ) {
+    ApiResponse<Void> delete(@PathVariable String role) {
         roleService.delete(role);
         return ApiResponse.<Void>builder().build();
     }
-
 }

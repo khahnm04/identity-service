@@ -1,10 +1,11 @@
 package com.khahnm04.identityservice.validator;
 
-import jakarta.validation.Constraint;
-import jakarta.validation.Payload;
+import static java.lang.annotation.ElementType.*;
 
 import java.lang.annotation.*;
-import static java.lang.annotation.ElementType.*;
+
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 
 @Target({FIELD})
 @Retention(RetentionPolicy.RUNTIME)
@@ -18,5 +19,4 @@ public @interface DobConstraint {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
 }

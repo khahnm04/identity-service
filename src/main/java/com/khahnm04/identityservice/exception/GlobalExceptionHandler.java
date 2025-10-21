@@ -1,17 +1,19 @@
 package com.khahnm04.identityservice.exception;
 
-import com.khahnm04.identityservice.dto.response.ApiResponse;
+import java.util.Map;
+import java.util.Objects;
+
 import jakarta.validation.ConstraintViolation;
-import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import com.khahnm04.identityservice.dto.response.ApiResponse;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @ControllerAdvice
@@ -39,12 +41,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = AccessDeniedException.class)
     ResponseEntity<ApiResponse> handlingAccessDeniedException(AccessDeniedException exception) {
         ErrorCode errorCode = ErrorCode.UNAUTHORIZED;
-        return ResponseEntity.status(errorCode.getStatusCode()).body(
-                ApiResponse.builder()
+        return ResponseEntity.status(errorCode.getStatusCode())
+                .body(ApiResponse.builder()
                         .code(errorCode.getCode())
                         .message(errorCode.getMessage())
-                        .build()
-        );
+                        .build());
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
@@ -54,8 +55,8 @@ public class GlobalExceptionHandler {
         Map<String, Object> attributes = null;
         try {
             errorCode = ErrorCode.valueOf(enumKey);
-            var constraintViolation = exception.getBindingResult()
-                    .getFieldErrors().getFirst().unwrap(ConstraintViolation.class);
+            var constraintViolation =
+                    exception.getBindingResult().getFieldErrors().getFirst().unwrap(ConstraintViolation.class);
             attributes = constraintViolation.getConstraintDescriptor().getAttributes();
             log.info("attributes = " + attributes);
         } catch (IllegalArgumentException e) {
@@ -66,8 +67,7 @@ public class GlobalExceptionHandler {
         apiResponse.setMessage(
                 Objects.nonNull(attributes)
                         ? mapAttribute(errorCode.getMessage(), attributes)
-                        : errorCode.getMessage()
-        );
+                        : errorCode.getMessage());
         return ResponseEntity.badRequest().body(apiResponse);
     }
 
@@ -75,5 +75,4 @@ public class GlobalExceptionHandler {
         String minValue = String.valueOf(attributes.get(MIN_ATTRIBUTE));
         return message.replace("{" + MIN_ATTRIBUTE + "}", minValue);
     }
-
 }

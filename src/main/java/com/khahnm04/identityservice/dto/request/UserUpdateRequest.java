@@ -1,11 +1,12 @@
 package com.khahnm04.identityservice.dto.request;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.khahnm04.identityservice.validator.DobConstraint;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import java.util.List;
 
 @Data
 @Builder
@@ -24,5 +25,4 @@ public class UserUpdateRequest {
     LocalDate dob;
 
     List<String> roles;
-
 }

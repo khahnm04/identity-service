@@ -1,18 +1,22 @@
 package com.khahnm04.identityservice.controller;
 
-import com.khahnm04.identityservice.dto.response.ApiResponse;
+import java.util.List;
+
+import jakarta.validation.Valid;
+
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
+
 import com.khahnm04.identityservice.dto.request.UserCreationRequest;
 import com.khahnm04.identityservice.dto.request.UserUpdateRequest;
+import com.khahnm04.identityservice.dto.response.ApiResponse;
 import com.khahnm04.identityservice.dto.response.UserResponse;
 import com.khahnm04.identityservice.service.UserService;
-import jakarta.validation.Valid;
+
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -35,7 +39,9 @@ public class UserController {
     ApiResponse<List<UserResponse>> getUsers() {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         log.info("Username : {}", authentication.getName());
-        authentication.getAuthorities().forEach(grantedAuthority -> log.info("Authority : {}", grantedAuthority.getAuthority()));
+        authentication
+                .getAuthorities()
+                .forEach(grantedAuthority -> log.info("Authority : {}", grantedAuthority.getAuthority()));
         return ApiResponse.<List<UserResponse>>builder()
                 .result(userService.getUsers())
                 .build();
@@ -67,5 +73,4 @@ public class UserController {
         userService.deleteUser(userId);
         return ApiResponse.<String>builder().result("User has been deleted").build();
     }
-
 }

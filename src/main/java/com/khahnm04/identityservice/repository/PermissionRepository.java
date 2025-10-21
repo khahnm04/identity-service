@@ -1,9 +1,9 @@
 package com.khahnm04.identityservice.repository;
 
-import com.khahnm04.identityservice.entity.Permission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.khahnm04.identityservice.entity.Permission;
+
 @Repository
-public interface PermissionRepository extends JpaRepository<Permission, String> {
-}
+public interface PermissionRepository extends JpaRepository<Permission, String> {}
