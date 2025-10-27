@@ -3,7 +3,6 @@ package com.khahnm04.identityservice.service;
 import java.util.HashSet;
 import java.util.List;
 
-import com.khahnm04.identityservice.constant.PredefinedRole;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,11 +10,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.khahnm04.identityservice.constant.PredefinedRole;
 import com.khahnm04.identityservice.dto.request.UserCreationRequest;
 import com.khahnm04.identityservice.dto.request.UserUpdateRequest;
 import com.khahnm04.identityservice.dto.response.UserResponse;
-import com.khahnm04.identityservice.entity.User;
 import com.khahnm04.identityservice.entity.Role;
+import com.khahnm04.identityservice.entity.User;
 import com.khahnm04.identityservice.exception.AppException;
 import com.khahnm04.identityservice.exception.ErrorCode;
 import com.khahnm04.identityservice.mapper.UserMapper;

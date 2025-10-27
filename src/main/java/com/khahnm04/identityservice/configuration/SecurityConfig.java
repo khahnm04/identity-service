@@ -1,7 +1,5 @@
 package com.khahnm04.identityservice.configuration;
 
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,6 +13,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
@@ -76,17 +75,17 @@ public class SecurityConfig {
         return source;
     }
 
-//    @Bean
-//    public CorsFilter corsFilter(){
-//        CorsConfiguration corsConfiguration = new CorsConfiguration();
-//        corsConfiguration.addAllowedOrigin("http://localhost:3000");
-//        corsConfiguration.addAllowedMethod("*");
-//        corsConfiguration.addAllowedHeader("*");
-//
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", corsConfiguration);
-//
-//        return new CorsFilter(source);
-//    }
+    //    @Bean
+    //    public CorsFilter corsFilter(){
+    //        CorsConfiguration corsConfiguration = new CorsConfiguration();
+    //        corsConfiguration.addAllowedOrigin("http://localhost:3000");
+    //        corsConfiguration.addAllowedMethod("*");
+    //        corsConfiguration.addAllowedHeader("*");
+    //
+    //        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    //        source.registerCorsConfiguration("/**", corsConfiguration);
+    //
+    //        return new CorsFilter(source);
+    //    }
 
 }
