@@ -13,7 +13,9 @@ export default function Home() {
       `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${accessToken}`
     );
     const data = await response.json();
-    
+
+    console.log(data);
+
     setUserDetails(data);
   };
 

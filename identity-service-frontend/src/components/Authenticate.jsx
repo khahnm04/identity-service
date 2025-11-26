@@ -8,6 +8,10 @@ export default function Authenticate() {
   const [isLoggedin, setIsLoggedin] = useState(false);
 
   useEffect(() => {
+
+    console.log("Authenticating.........");
+    console.log(window.location.href);
+
     const accessTokenRegex = /access_token=([^&]+)/;
     const isMatch = window.location.href.match(accessTokenRegex);
 
@@ -32,7 +36,7 @@ export default function Authenticate() {
       <Box
         sx={{
           display: "flex",
-          flexDirection : "column",
+          flexDirection: "column",
           gap: "30px",
           justifyContent: "center",
           alignItems: "center",
